@@ -1,0 +1,12 @@
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+#This is IDSHWK1
+#alert tcp any any -> $HOME_NET 8080 (msg:"TEST ALERT"; flags:A; ack:1; content:"I am IDS Homework I"; depth:100; offset:100; sid:20200317; rev:1;)
+
+# This is IDSHWK2
+pass tcp any any -> $HOME_NET 3399 (pcre:"/login|Initial/"; flowbits:set,test; sid:1000002; rev:1;)
+alert tcp any any -> $HOME_NET 3399 (msg:"bot founded"; pcre:"/(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\:[0-9]+/"; flowbits:isset,test; sid:1000001; rev:1;)
